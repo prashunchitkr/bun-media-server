@@ -1,0 +1,11 @@
+{
+  "cSpell.words": ["elysia", "elysiajs"],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "media server",
+      "database": "${workspaceFolder:bun-media-server}/prisma/dev.db"
+    }
+  ]
+}
