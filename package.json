@@ -1,19 +1,14 @@
 {
   "name": "bun-media-server",
-  "version": "1.0.50",
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
-  },
-  "dependencies": {
-    "@elysiajs/static": "^1.0.3",
-    "@elysiajs/swagger": "^1.0.5",
-    "@prisma/client": "5.14.0",
-    "elysia": "latest"
-  },
-  "devDependencies": {
-    "bun-types": "latest",
-    "prisma": "^5.14.0"
-  },
-  "module": "src/index.js"
+    "build": "bun --filter '*' build",
+    "dev": "bun --filter '*' dev",
+    "dev:api": "bun --filter '@app/api' dev",
+    "dev:web": "bun --filter '@app/web' dev"
+  }
 }

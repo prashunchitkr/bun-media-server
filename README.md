@@ -1,15 +1,22 @@
-# Elysia with Bun runtime
+# Bun Media Server
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
-```bash
-bun create elysia ./elysia-example
+## Installing Dependencies
+
+```sh
+bun i
 ```
 
-## Development
-To start the development server run:
-```bash
-bun run dev
+## Preparing Prisma
+
+```sh
+cd apps/api
+bun prisma migrate dev
 ```
 
-Open http://localhost:3000/ with your browser to see the result.
+## Starting Dev Server
+
+```sh
+bun dev
+```
+
+Backend server should be running on port `3000` and the web app should be running on port `3001`.

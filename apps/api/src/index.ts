@@ -1,5 +1,6 @@
 import { Elysia, NotFoundError, t } from "elysia";
 import { swagger } from "@elysiajs/swagger";
+import { cors } from "@elysiajs/cors";
 import { staticPlugin } from "@elysiajs/static";
 
 import { prisma } from "@/core/prisma";
@@ -11,6 +12,11 @@ const app = new Elysia({
     maxRequestBodySize: 5e8, // 500MB
   },
 })
+  .use(
+    cors({
+      origin: process.env.NODE_ENV === "development" ? ["*"] : [],
+    })
+  )
   .use(staticPlugin())
   .use(
     swagger({
@@ -31,6 +37,7 @@ const app = new Elysia({
         data: {
           title,
           path: mediaPath,
+          mimeType: media.type,
         },
       });
 
@@ -51,6 +58,12 @@ const app = new Elysia({
       }),
     }
   )
+  .get("/media", async () => {
+    const medias = await prisma.media.findMany({
+      select: { id: true, title: true, mimeType: true },
+    });
+    return medias;
+  })
   .get(
     "/media/:id",
     async ({ params: { id }, set, headers }) => {
